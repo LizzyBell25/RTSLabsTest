@@ -6,23 +6,26 @@
         {
             var Program = new Program();
             var run = true;
-            while (run){
+            while (run)
+            {
                 Console.WriteLine("Please cloose to be aboveBelow (1) or stringRotation (2)");
                 var input = Console.ReadLine();
-                switch(input)
+                switch (input)
                 {
                     case "aboveBelow":
                     case "ab":
                     case "1":
                         var NumberList = new List<int>();
                         int ComparisonNum = 0;
-                        while(true){
+                        while (true)
+                        {
                             Console.WriteLine("Please input a comma seperated list of numbers");
                             var Numbers = Console.ReadLine();
                             if (!Program.CheckInput(ref NumberList, Numbers)) Console.WriteLine("incorrect input, please try again");
                             else break;
                         }
-                        while(true){
+                        while (true)
+                        {
                             Console.WriteLine("Please input a comparison value");
                             var Number = Console.ReadLine();
                             if (!Int32.TryParse(Number, out ComparisonNum)) Console.WriteLine("incorrect input, please try again");
@@ -37,18 +40,20 @@
                     case "2":
                         var originalString = "";
                         int rotation = 0;
-                        while(true){
+                        while (true)
+                        {
                             Console.WriteLine("Please input a string");
                             originalString = Console.ReadLine();
                             if (string.IsNullOrEmpty(originalString)) Console.WriteLine("incorrect input, please try again");
                             else break;
                         }
 
-                        while(true){
+                        while (true)
+                        {
                             Console.WriteLine("Please input a rotation value");
                             var Number = Console.ReadLine();
                             if (!Int32.TryParse(Number, out rotation)) Console.WriteLine("incorrect input, please try again");
-                            else if (originalString.Length < rotation -1) Console.WriteLine("incorrect input, please try again");
+                            else if (originalString.Length < rotation - 1) Console.WriteLine("incorrect input, please try again");
                             else break;
                         }
 
@@ -79,8 +84,8 @@
 
         public class map
         {
-            public int above {get; set;}
-            public int below {get; set;}
+            public int above { get; set; }
+            public int below { get; set; }
 
             public override string ToString()
             {
@@ -90,21 +95,25 @@
 
         public map aboveBelow(int comparison, List<int> IntList)
         {
+            if (IntList == null) throw new Exception("Must provide a list of integers");
+
             var result = new map();
             IntList.Sort();
-            foreach (int i in IntList){
+            foreach (int i in IntList)
+            {
                 if (i < comparison) result.below++;
                 else break;
             }
             result.above = IntList.Count() - result.below;
-            
+
             return result;
         }
 
-        public string stringRotation(int rotation, string originalString){
+        public string stringRotation(int rotation, string originalString)
+        {
             if (rotation > originalString.Length) throw new Exception("Rotation value is larger then input string");
-            if (rotation < 0 ) throw new Exception("Rotation value can not be negiative");
-            
+            if (rotation < 0) throw new Exception("Rotation value can not be negiative");
+
             return originalString.Substring(rotation) + originalString.Substring(0, rotation);
         }
     }
