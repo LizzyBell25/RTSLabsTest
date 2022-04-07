@@ -65,7 +65,7 @@
             }
         }
 
-        public bool CheckInput(ref List<int> NumberList, string? Numbers)
+        private bool CheckInput(ref List<int> NumberList, string? Numbers)
         {
             if (Numbers == null) return false;
             foreach (string number in Numbers.Split(","))
@@ -102,6 +102,9 @@
         }
 
         public string stringRotation(int rotation, string originalString){
+            if (rotation > originalString.Length) throw new Exception("Rotation value is larger then input string");
+            if (rotation < 0 ) throw new Exception("Rotation value can not be negiative");
+            
             return originalString.Substring(rotation) + originalString.Substring(0, rotation);
         }
     }
